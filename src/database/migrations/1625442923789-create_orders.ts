@@ -20,7 +20,8 @@ export class createOrders1625442923789 implements MigrationInterface {
           },
           {
             name: "obs",
-            type: "varchar"
+            type: "varchar",
+            isNullable: true
           },
           {
             name: "created_at",
