@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createTables1625442528819 implements MigrationInterface {
+export class createOrderPad1625442802175 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "tables",
+        name: "order_pad",
         columns: [
           {
             name: "id",
@@ -15,19 +15,9 @@ export class createTables1625442528819 implements MigrationInterface {
             generationStrategy: "increment"
           },
           {
-            name: "name",
-            type: "varchar",
-            length: "10"
-          },
-          {
             name: "hash_code",
             type: "varchar",
             length: "120"
-          },
-          {
-            name: "status",
-            type: "boolean",
-            default: true
           },
           {
             name: "created_at",
@@ -45,7 +35,7 @@ export class createTables1625442528819 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("tables")
+    await queryRunner.dropTable("order_pad")
   }
 
 }

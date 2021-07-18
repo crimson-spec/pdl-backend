@@ -25,9 +25,9 @@ export default class Product {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Category)
-  category: Category;
+  /* @ManyToOne(() => Category)
+  Category: Category;
 
   @ManyToMany(() => Order, (order) => order.products)
-  orders: Order[];
+  orders: Order[]; */
 }
