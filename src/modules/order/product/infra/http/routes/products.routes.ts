@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import ProductsController from "../controllers/ProductsController";
+import IndexProductController from "../../../customProductUseCase/index/IndexProductController";
 
 const productsController = new ProductsController();
 
 const productsRoutes = Router();
 
-productsRoutes.get("/", productsController.index)
+productsRoutes.get("/", IndexProductController.handle)
 productsRoutes.get("/:id", productsController.show)
 productsRoutes.post("/", productsController.store)
 

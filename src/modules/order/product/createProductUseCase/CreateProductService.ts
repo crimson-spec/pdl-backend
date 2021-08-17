@@ -1,4 +1,5 @@
-import ProductRepository from "../../repositories/ProductRepository"
+import AppError from "../../../../shared/middlewares/errors";
+
 
 interface IRequest {
   category_id: number;
@@ -24,8 +25,7 @@ export default class CreateProductService {
     })
 
     if (!productCreated)
-      throw new Error("Erro ao cadastrar produto")
+      throw new AppError("Erro ao cadastrar produto")
 
     return productCreated;
   }
-}

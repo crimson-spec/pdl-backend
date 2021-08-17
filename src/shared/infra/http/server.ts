@@ -1,6 +1,7 @@
 require('dotenv').config()
-import "./shared/typeorm/database/connection";
+import "./shared/infra/typeorm/database/connection";
 import "express-async-errors"
+import AppError from "./shared/middlewares/errors";
 import express from "express";
 import routes from "./routes";
 
@@ -10,8 +11,9 @@ app.use(express.json())
 app.use(routes)
 
 app.use((error, request, response, next) => {
-  if (error instanceof Error)
-    return response.status(400).json({ Error: error.name, Message: error.message })
+  if (error instanceof AppError) {
+    return response.status(error.status).json({ Error: error.message })
+  }
 
   return response.status(500).json({ Error: error.name, Message: error.message })
 });
