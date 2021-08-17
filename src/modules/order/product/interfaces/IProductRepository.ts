@@ -1,6 +1,6 @@
 import ICreateProductDTO from "./ICreateProductDTO";
 
-import Product from "../../../shared/entities/Product"
+import Product from "../../../../shared/infra/typeorm/entities/Product"
 
 export default interface IProductRepository {
   index(): Promise<Product[]>;

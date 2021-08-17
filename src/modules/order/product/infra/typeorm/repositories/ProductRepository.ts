@@ -1,8 +1,8 @@
 import { getRepository } from "typeorm";
 
-import Product from "../../../shared/entities/Product";
-import ICreateProductDTO from "../interfaces/ICreateProductDTO";
-import IProductRepository from "../interfaces/IProductRepository";
+import Product from "../../../../../../shared/infra/typeorm/entities/Product";
+import ICreateProductDTO from "../../../../../model/products/interfaces/ICreateProductDTO";
+import IProductRepository from "../../../../../model/products/interfaces/IProductRepository";
 
 
 
@@ -42,5 +42,4 @@ export default class ProductRepository implements IProductRepository {
   findById(id: number): Promise<Product> {
     return this.ormRepository.findOne(id);
   }
-
 }
