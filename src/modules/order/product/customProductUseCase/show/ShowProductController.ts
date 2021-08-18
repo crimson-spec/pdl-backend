@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
+import ShowProductService from "@order/product/customProductUseCase/show/ShowProductService";
 
 
 export default class ShowProductController {
@@ -6,7 +8,7 @@ export default class ShowProductController {
 
     const { id } = request.body;
 
-    const productService = new ShowProductService();
+    const productService = container.resolve(ShowProductService)
 
     const showProduct = await productService.execute(id);
 

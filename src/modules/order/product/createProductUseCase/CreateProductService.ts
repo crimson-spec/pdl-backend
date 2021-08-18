@@ -1,23 +1,31 @@
-import AppError from "../../../../shared/middlewares/errors";
+import AppError from "@shared/infra/http/middlewares/errors";
+import { injectable, inject } from "tsyringe";
+import IProductRepository from "@order/product/infra/typeorm/repositories/implementations/ProductRepository";
 
 
 interface IRequest {
   category_id: number;
   name: string;
   value: number;
-  status: boolean;
+  status?: boolean;
 }
 
+@injectable()
 export default class CreateProductService {
-  async execute({ category_id, name, value, status }: IRequest) {
-    const productRepository = new ProductRepository();
 
-    const productExists = await productRepository.findByName(name)
+  constructor(
+    @inject("ProductRepository")
+    private productRepository: IProductRepository
+  ) { }
+
+  async execute({ category_id, name, value, status }: IRequest) {
+
+    const productExists = await this.productRepository.findByName(name)
 
     if (productExists)
-      throw new Error("Produto já existe")
+      throw new AppError("Produto já existe")
 
-    const productCreated = await productRepository.create({
+    const productCreated = await this.productRepository.create({
       category_id,
       name,
       value,
@@ -29,3 +37,4 @@ export default class CreateProductService {
 
     return productCreated;
   }
+}

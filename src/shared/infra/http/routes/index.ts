@@ -1,12 +1,12 @@
 import { Router } from "express"
 
-import userRoutes from "./model/users/routes/user.routes"
-import productsRoutes from "./model/products/routes/products.routes"
+import categoryRouter from "@order/category/infra/http/routes"
+import productRouter from "@order/product/infra/http/routes"
 
 const routes = Router();
 
-routes.use("/products", productsRoutes)
-routes.use("/users", userRoutes)
+routes.use("/products", productRouter)
+routes.use("/categories", categoryRouter)
 
 /**
  * TODAS AS ROTAS

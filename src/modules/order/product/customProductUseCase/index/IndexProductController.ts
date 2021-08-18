@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
+import IndexProductService from "@order/product/customProductUseCase/index/IndexProductService";
 
 export default class IndexProductController {
   async handle(request: Request, response: Response) {
-    const productService = new IndexProductService();
+    const productService = container.resolve(IndexProductService);
 
     const indexProducts = await productService.execute();
 
