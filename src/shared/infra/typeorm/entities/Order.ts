@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany } from "typeorm";
 import OrderPad from "./OrderPad";
-import Product from "./Product";
 
 @Entity("orders")
 export default class Order {
@@ -19,6 +18,6 @@ export default class Order {
   @ManyToOne(() => OrderPad)
   order_pad: OrderPad;
 
-  @ManyToMany(() => Product, (product) => product.orders)
-  products: Product[];
+  /* @ManyToMany(() => Product, (product) => product.orders)
+  products: Product[]; */
 }

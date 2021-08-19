@@ -1,5 +1,6 @@
 require('dotenv').config()
 import "@shared/infra/typeorm/database/connection";
+import "@shared/container"
 import "express-async-errors"
 import AppError from "@shared/infra/http/middlewares/errors";
 import express from "express";

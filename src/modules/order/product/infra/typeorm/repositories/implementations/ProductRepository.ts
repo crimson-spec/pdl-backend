@@ -1,6 +1,6 @@
-import { getRepository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 
-import Product from "@shared/infra/typeorm/entities/Product";
+import Product from "@order/product/infra/typeorm/entities/Product";
 import ICreateProductDTO from "@order/product/dtos/ICreateProductDTO";
 import IProductRepository from "@order/product/infra/typeorm/repositories/implementations/ProductRepository";
 
@@ -8,7 +8,11 @@ import IProductRepository from "@order/product/infra/typeorm/repositories/implem
 
 export default class ProductRepository implements IProductRepository {
 
-  private ormRepository = getRepository(Product);
+  private ormRepository: Repository<Product>;
+
+  constructor() {
+    this.ormRepository = getRepository(Product);
+  }
 
   /**
    * CRUD de Products
