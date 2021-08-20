@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany } from "typeorm";
-import OrderPad from "./OrderPad";
+import OrderPad from "@order/order-pad/infra/typeorm/entities/OrderPad";
 
 @Entity("orders")
 export default class Order {

@@ -2,9 +2,8 @@ import AppError from "@shared/infra/http/middlewares/errors";
 import { inject, injectable } from "tsyringe";
 import IProductRepository from "@order/product/infra/typeorm/repositories/IProductRepository";
 
-
 @injectable()
-export default class ShowProductService {
+export default class DeleteProductService {
 
   constructor(
     @inject("ProductRepository")
@@ -16,8 +15,13 @@ export default class ShowProductService {
     const productExists = await this.productRepository.findById(id);
 
     if (!productExists)
-      throw new AppError("Produto não encontrado")
+      throw new AppError("Produto não existe!");
 
-    return productExists;
+    const productDeleted = await this.productRepository.delete(id);
+
+    if (!productDeleted)
+      throw new AppError("Falha ao deletar Produto!")
+
+    return productDeleted;
   }
 }

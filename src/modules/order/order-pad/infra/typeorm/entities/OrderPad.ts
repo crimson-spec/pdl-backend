@@ -1,6 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from "typeorm";
-import Order from "./Order";
-import Table from "./Table"
 
 @Entity("order_pad")
 export default class OrderPad {
@@ -19,9 +17,9 @@ export default class OrderPad {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Table)
+  /*@ManyToOne(() => Table)
   table: Table;
 
   @OneToMany(() => Order, (order) => order.order_pad)
-  orders: Order[];
+  orders: Order[];*/
 }

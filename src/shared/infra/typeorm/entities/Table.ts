@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
-import OrderPad from "./OrderPad";
 
 @Entity("tables")
 export default class Table {
@@ -20,7 +19,7 @@ export default class Table {
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  @OneToMany(() => OrderPad, (orderPad) => orderPad.table)
-  order_pads: OrderPad[];
+  /*
+    @OneToMany(() => OrderPad, (orderPad) => orderPad.table)
+    order_pads: OrderPad[];*/
 }

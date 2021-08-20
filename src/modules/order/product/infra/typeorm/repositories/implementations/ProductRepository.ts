@@ -1,4 +1,4 @@
-import { getRepository, Repository } from "typeorm";
+import { DeleteResult, getRepository, Repository } from "typeorm";
 
 import Product from "@order/product/infra/typeorm/entities/Product";
 import ICreateProductDTO from "@order/product/dtos/ICreateProductDTO";
@@ -39,6 +39,10 @@ export default class ProductRepository implements IProductRepository {
       status
     })
     return await this.ormRepository.save(product);
+  }
+
+  async delete(id: number): Promise<DeleteResult> {
+    return this.ormRepository.delete(id)
   }
 
   /**

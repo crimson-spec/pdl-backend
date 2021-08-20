@@ -6,7 +6,7 @@ import ShowProductService from "@order/product/customProductUseCase/show/ShowPro
 export default class ShowProductController {
   async handle(request: Request, response: Response) {
 
-    const { id } = request.body;
+    const { id } = request.params;
 
     const productService = container.resolve(ShowProductService)
 
