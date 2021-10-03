@@ -18,18 +18,18 @@ export class createOrdersProducts1625443182496 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "fk_order_id",
             columnNames: ["order_id"],
             referencedColumnNames: ["id"],
             referencedTableName: "orders",
-            onDelete: "CASCADE"
+            onUpdate: "CASCADE",
+            onDelete: "RESTRICT"
           },
           {
-            name: "fk_product_id",
             columnNames: ["product_id"],
             referencedColumnNames: ["id"],
             referencedTableName: "products",
-            onDelete: "CASCADE"
+            onUpdate: "CASCADE",
+            onDelete: "RESTRICT"
           }
         ]
       })

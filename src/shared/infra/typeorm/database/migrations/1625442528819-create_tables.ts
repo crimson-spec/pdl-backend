@@ -15,8 +15,8 @@ export class createTables1625442528819 implements MigrationInterface {
             generationStrategy: "increment"
           },
           {
-            name: "name",
-            type: "varchar",
+            name: "internal_number",
+            type: "int",
             length: "10"
           },
           {
@@ -25,7 +25,7 @@ export class createTables1625442528819 implements MigrationInterface {
             length: "120"
           },
           {
-            name: "status",
+            name: "in_use",
             type: "boolean",
             default: false
           },

@@ -15,9 +15,19 @@ export class createOrderPad1625442802175 implements MigrationInterface {
             generationStrategy: "increment"
           },
           {
+            name: "table_id",
+            type: "int",
+            isNullable: true
+          },
+          {
             name: "hash_code",
             type: "varchar",
             length: "120"
+          },
+          {
+            name: "in_use",
+            type: "boolean",
+            default: false
           },
           {
             name: "created_at",
@@ -28,6 +38,15 @@ export class createOrderPad1625442802175 implements MigrationInterface {
             name: "updated_at",
             type: "timestamp",
             default: "now()"
+          }
+        ],
+        foreignKeys: [
+          {
+            columnNames: ["table_id"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "tables",
+            onUpdate: "CASCADE",
+            onDelete: "RESTRICT"
           }
         ]
       })

@@ -27,11 +27,6 @@ export class createOrders1625442923789 implements MigrationInterface {
             name: "created_at",
             type: "timestamp",
             default: "now()"
-          },
-          {
-            name: "updated_at",
-            type: "timestamp",
-            default: "now()"
           }
         ],
         foreignKeys: [
@@ -40,7 +35,8 @@ export class createOrders1625442923789 implements MigrationInterface {
             columnNames: ["order_pad_id"],
             referencedColumnNames: ["id"],
             referencedTableName: "order_pad",
-            onDelete: "CASCADE"
+            onUpdate: "CASCADE",
+            onDelete: "RESTRICT"
           }
         ]
       })
