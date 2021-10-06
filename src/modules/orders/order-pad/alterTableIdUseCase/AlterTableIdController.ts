@@ -1,22 +1,18 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import SendOrderService from "@orders/order/sendOrderUseCase/SendOrderService";
+import AlterTableIdService from "@orders/order-pad/alterTableIdUseCase/AlterTableIdService";
 
-export default class AlterTableIdController{
-  async handle(request: Request, response: Response){
-    const {table_id, order_pad_id, products, obs} = request.body;
+export default class AlterTableIdController {
+  async handle(request: Request, response: Response) {
+    const { table_id, in_use } = request.body;
+    const { id } = request.params;
+    const alterTableIdService = container.resolve(AlterTableIdService);
+    await alterTableIdService.execute({
+      id: Number(id),
+      table_id,
+      in_use
+    });
+    return response.status(200);
 
-    const sendOrderService = container.resolve(SendOrderService);
-
-    const order = await sendOrderService.execute(
-      {
-        table_id,
-        order_pad_id,
-        products,
-        obs
-      }
-    )
-    return response.status(201).json(order);
-    
   }
 }
