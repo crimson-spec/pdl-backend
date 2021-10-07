@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createOrderPad1625442802175 implements MigrationInterface {
+export class createProducts1633568552617 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "order_pad",
+        name: "products",
         columns: [
           {
             name: "id",
@@ -15,19 +15,23 @@ export class createOrderPad1625442802175 implements MigrationInterface {
             generationStrategy: "increment"
           },
           {
-            name: "table_id",
-            type: "int",
-            isNullable: true
+            name: "category_id",
+            type: "int"
           },
           {
-            name: "hash_code",
+            name: "name",
             type: "varchar",
-            length: "120"
+            length: "60",
+            isUnique: true
           },
           {
-            name: "in_use",
+            name: "value",
+            type: "decimal(8,2)"
+          },
+          {
+            name: "status",
             type: "boolean",
-            default: false
+            default: true
           },
           {
             name: "created_at",
@@ -42,19 +46,20 @@ export class createOrderPad1625442802175 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            columnNames: ["table_id"],
+            name: "fk_category_id",
+            columnNames: ["category_id"],
             referencedColumnNames: ["id"],
-            referencedTableName: "tables",
+            referencedTableName: "categories",
             onUpdate: "CASCADE",
             onDelete: "RESTRICT"
           }
         ]
       })
-    )
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("order_pad")
+    await queryRunner.dropTable("products");
   }
 
 }

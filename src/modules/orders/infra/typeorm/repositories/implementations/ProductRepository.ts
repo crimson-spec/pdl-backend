@@ -39,9 +39,10 @@ export default class ProductRepository implements IProductRepository {
       value,
       status
     })
+    console.info("DADOS => " + product)
     return await this.ormRepository.save(product);
   }
-  
+
   update({ category_id, name, value, status }: IUpdateProductDTO): Promise<Product> {
     throw new Error("Method not implemented.");
   }

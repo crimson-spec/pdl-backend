@@ -6,6 +6,9 @@ export default class Category {
   id: number;
 
   @Column()
+  sector_id: number;
+
+  @Column()
   name: string;
 
   @CreateDateColumn()

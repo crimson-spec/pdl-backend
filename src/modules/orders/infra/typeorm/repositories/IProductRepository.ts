@@ -1,7 +1,7 @@
 import ICreateProductDTO from "modules/orders/product/dtos/ICreateProductDTO";
 import IUpdateProductDTO from "modules/orders/product/dtos/IUpdateProductDTO";
 
-import Product from "modules/orders/product/infra/typeorm/entities/Product"
+import Product from "@orders/infra/typeorm/entities/Product"
 import { DeleteResult } from "typeorm";
 
 export default interface IProductRepository {

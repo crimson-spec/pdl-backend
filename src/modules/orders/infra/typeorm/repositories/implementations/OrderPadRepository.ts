@@ -6,18 +6,23 @@ import IUpdateOrderPadDTO from "@orders/order-pad/dtos/IUpdateOrderPadDTO";
 
 
 
-export default class OrderPadRepository implements IOrderPadRepository{
+export default class OrderPadRepository implements IOrderPadRepository {
   private ormRepository: Repository<OrderPad>;
 
-  constructor(){
+  constructor() {
     this.ormRepository = getRepository(OrderPad);
   }
 
-  async update({id, table_id, hash_code}: IUpdateOrderPadDTO): Promise<OrderPad> {
+  async update({ id, table_id, hash_code, in_use }: IUpdateOrderPadDTO): Promise<OrderPad> {
     return await this.ormRepository.save({
       id,
       table_id,
-      hash_code
+      hash_code,
+      in_use
     });
+  }
+
+  async findById(id: number): Promise<OrderPad> {
+    return this.ormRepository.findOne(id);
   }
 }

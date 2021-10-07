@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createSectors1625427447658 implements MigrationInterface {
+export class createCategories1633568407318 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "sectors",
+        name: "categories",
         columns: [
           {
             name: "id",
@@ -13,6 +13,10 @@ export class createSectors1625427447658 implements MigrationInterface {
             isPrimary: true,
             isGenerated: true,
             generationStrategy: "increment"
+          },
+          {
+            name: "sector_id",
+            type: "int"
           },
           {
             name: "name",
@@ -29,14 +33,24 @@ export class createSectors1625427447658 implements MigrationInterface {
             name: "updated_at",
             type: "timestamp",
             default: "now()"
+          },
+        ],
+        foreignKeys: [
+          {
+            name: "fk_sector_id",
+            columnNames: ["sector_id"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "sectors",
+            onUpdate: "CASCADE",
+            onDelete: "RESTRICT"
           }
         ]
       })
-    )
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("sectors")
+    await queryRunner.dropTable("categories");
   }
 
 }

@@ -26,7 +26,7 @@ export default class Product {
   updated_at: Date;
 
   @ManyToOne(() => Category)
-  Category: Category;
+  category: Category;
 
   @ManyToMany(() => Order)
   @JoinTable({
