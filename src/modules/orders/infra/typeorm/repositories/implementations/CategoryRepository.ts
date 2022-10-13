@@ -1,13 +1,11 @@
-import { getRepository, Repository } from "typeorm";
-import Category from "@orders/infra/typeorm/entities/Category";
-import ICategoryRepository from "@orders/infra/typeorm/repositories/ICategoryRepository";
+import { getRepository, Repository } from 'typeorm';
+import Category from '@orders/infra/typeorm/entities/Category';
+import ICategoryRepository from '@orders/infra/typeorm/repositories/ICategoryRepository';
+import ICreateCategoryDTO from '@orders/category/dtos/ICreateCategoryDTO';
 
-
-
-export default class CategoryRepository implements ICategoryRepository{
+export default class CategoryRepository implements ICategoryRepository {
   private ormRepository: Repository<Category>;
-  constructor()
-  {
+  constructor() {
     this.ormRepository = getRepository(Category);
   }
 
@@ -15,8 +13,8 @@ export default class CategoryRepository implements ICategoryRepository{
     return await this.ormRepository.find();
   }
 
-  async create(name: string): Promise<Category> {
-    const category = this.ormRepository.create({name});
+  async create({ name, sector_id }: ICreateCategoryDTO): Promise<Category> {
+    const category = this.ormRepository.create({ name, sector_id });
     return await this.ormRepository.save(category);
   }
 
