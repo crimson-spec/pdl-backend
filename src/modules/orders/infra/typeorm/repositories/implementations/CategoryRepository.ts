@@ -10,7 +10,9 @@ export default class CategoryRepository implements ICategoryRepository {
   }
 
   async index(): Promise<Category[]> {
-    return await this.ormRepository.find();
+    return await this.ormRepository.find({
+      relations: ['sector'],
+    });
   }
 
   async create({ name, sector_id }: ICreateCategoryDTO): Promise<Category> {

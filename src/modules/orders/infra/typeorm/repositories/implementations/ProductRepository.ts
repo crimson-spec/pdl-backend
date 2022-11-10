@@ -1,14 +1,11 @@
-import { DeleteResult, getRepository, Repository } from "typeorm";
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 
-import ICreateProductDTO from "@orders/product/dtos/ICreateProductDTO";
-import IUpdateProductDTO from "@orders/product/dtos/IUpdateProductDTO";
-import Product from "@orders/infra/typeorm/entities/Product";
-import IProductRepository from "@orders/infra/typeorm/repositories/IProductRepository";
-
-
+import ICreateProductDTO from '@orders/product/dtos/ICreateProductDTO';
+import IUpdateProductDTO from '@orders/product/dtos/IUpdateProductDTO';
+import Product from '@orders/infra/typeorm/entities/Product';
+import IProductRepository from '@orders/infra/typeorm/repositories/IProductRepository';
 
 export default class ProductRepository implements IProductRepository {
-
   private ormRepository: Repository<Product>;
 
   constructor() {
@@ -26,29 +23,40 @@ export default class ProductRepository implements IProductRepository {
   }
 
   async index(): Promise<Product[]> {
-    const products = await this.ormRepository.find();
+    const products = await this.ormRepository.find({
+      relations: ['category'],
+    });
 
     return products;
   }
 
-  async create({ category_id, name, value, status }: ICreateProductDTO): Promise<Product> {
-
+  async create({
+    category_id,
+    name,
+    value,
+    status,
+  }: ICreateProductDTO): Promise<Product> {
     const product = this.ormRepository.create({
       category_id,
       name,
       value,
-      status
-    })
-    console.info("DADOS => " + product)
+      status,
+    });
+    console.info('DADOS => ' + product);
     return await this.ormRepository.save(product);
   }
 
-  update({ category_id, name, value, status }: IUpdateProductDTO): Promise<Product> {
-    throw new Error("Method not implemented.");
+  update({
+    category_id,
+    name,
+    value,
+    status,
+  }: IUpdateProductDTO): Promise<Product> {
+    throw new Error('Method not implemented.');
   }
 
   async delete(id: number): Promise<DeleteResult> {
-    return this.ormRepository.delete(id)
+    return this.ormRepository.delete(id);
   }
 
   /**
@@ -57,8 +65,8 @@ export default class ProductRepository implements IProductRepository {
 
   async findByName(name: string): Promise<Product | undefined> {
     return await this.ormRepository.findOne({
-      where: { name }
-    })
+      where: { name },
+    });
   }
 
   async findById(id: number): Promise<Product | undefined> {

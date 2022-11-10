@@ -18,6 +18,9 @@ import ITableRepository from '@orders/infra/typeorm/repositories/ITableRepositor
 import CategoryRepository from '@orders/infra/typeorm/repositories/implementations/CategoryRepository';
 import ICategoryRepository from '@orders/infra/typeorm/repositories/ICategoryRepository';
 
+import SectorRepository from '@orders/infra/typeorm/repositories/implementations/SectorRepository';
+import ISectorRepository from '@orders/infra/typeorm/repositories/ISectorRepository';
+
 import UserRepository from '@modules/admin/infra/typeorm/repositories/implementations/UserRepository';
 import IUserRepository from '@modules/admin/infra/typeorm/repositories/IUserRepository';
 
@@ -55,6 +58,11 @@ container.registerSingleton<ITableRepository>(
 container.registerSingleton<ICategoryRepository>(
   'CategoryRepository',
   CategoryRepository
+);
+
+container.registerSingleton<ISectorRepository>(
+  'SectorRepository',
+  SectorRepository
 );
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
