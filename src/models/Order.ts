@@ -1,5 +1,12 @@
-import { Entity, Column, CreateDateColumn, PrimaryColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  PrimaryColumn,
+  BeforeInsert,
+} from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { generate } from '../shared/utils/generateRandomNumbers';
 // import OrderPad from './OrderPad';
 // import Product from './Product';
 
@@ -43,6 +50,13 @@ export default class Order {
   constructor() {
     if (!this.id) {
       this.id = uuid();
+    }
+  }
+
+  @BeforeInsert()
+  generateInternalNumber() {
+    if (!this.internal_number) {
+      this.internal_number = generate(4);
     }
   }
 }

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 interface TokenPayload {
-  user_id: number;
+  user_id: string;
   iat: number;
   exp: number;
 }
@@ -16,7 +16,10 @@ export const ensureAuthMiddleware = (
   if (authToken) {
     const token = authToken.split(' ')[1];
     try {
-      const payload = verify(token, process.env.JWT_HASH) as TokenPayload;
+      const payload = verify(
+        token,
+        process.env.JWT_ADMIN_SECRET
+      ) as TokenPayload;
       // ir na base de dados e carregar as permissions
       request.user = { id: payload.user_id, permissions: [] };
       return next();

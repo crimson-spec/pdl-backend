@@ -1,4 +1,9 @@
-import { DeleteResult, getRepository, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  getRepository,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
 import ICreateProductDTO from '../../dtos/create/ICreateProductDTO';
 import IUpdateProductDTO from '../../dtos/update/IUpdateProductDTO';
 import Product from '../../models/Product';
@@ -11,9 +16,17 @@ export default class ProductRepository implements IProductRepository {
     this.ormRepository = getRepository(Product);
   }
 
-  /**
-   * CRUD de Products
-   */
+  async hasInventory(id: string, quantity: number): Promise<boolean> {
+    const products = await this.ormRepository.count({
+      where: {
+        id,
+        quantity: MoreThanOrEqual(quantity),
+        status: true,
+      },
+    });
+
+    return products > 0;
+  }
 
   async show(id: string): Promise<Product> {
     return await this.ormRepository.findOne(id);
@@ -33,6 +46,7 @@ export default class ProductRepository implements IProductRepository {
     value,
     status,
     quantity,
+    measurement,
     image_filename,
   }: ICreateProductDTO): Promise<Product> {
     const product = this.ormRepository.create({
@@ -41,6 +55,7 @@ export default class ProductRepository implements IProductRepository {
       value,
       status,
       quantity,
+      measurement,
       image_filename,
     });
     return await this.ormRepository.save(product);
@@ -53,6 +68,7 @@ export default class ProductRepository implements IProductRepository {
     value,
     status,
     quantity,
+    measurement,
     image_filename,
   }: IUpdateProductDTO): Promise<Product> {
     return await this.ormRepository.save({
@@ -62,6 +78,7 @@ export default class ProductRepository implements IProductRepository {
       value,
       status,
       quantity,
+      measurement,
       image_filename,
     });
   }

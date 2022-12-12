@@ -13,14 +13,9 @@ export default class OrderRepository implements IOrderRepository {
     throw new Error('Method not implemented.');
   }
 
-  async create({
-    order_pad_id,
-    internal_number,
-    observation,
-  }: ICreateOrderDTO): Promise<Order> {
+  async create({ order_pad_id, observation }: ICreateOrderDTO): Promise<Order> {
     const order = this.ormRepository.create({
       order_pad_id,
-      internal_number,
       observation,
     });
     return await this.ormRepository.save(order);

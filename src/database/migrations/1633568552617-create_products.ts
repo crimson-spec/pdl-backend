@@ -29,13 +29,17 @@ export class createProducts1633568552617 implements MigrationInterface {
             type: 'int',
           },
           {
+            name: 'measurement',
+            type: 'varchar',
+          },
+          {
             name: 'status',
             type: 'boolean',
             default: true,
           },
           {
             name: 'image_filename',
-            type: 'string',
+            type: 'varchar',
             isNullable: true,
           },
           {

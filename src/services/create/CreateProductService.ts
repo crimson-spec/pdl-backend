@@ -8,6 +8,7 @@ interface IRequest {
   value: number;
   status: boolean;
   quantity: number;
+  measurement: string;
   image_filename?: string;
 }
 
@@ -23,6 +24,7 @@ export default class CreateProductService {
     value,
     status,
     quantity,
+    measurement,
     image_filename,
   }: IRequest) {
     const productExists = await this.productRepository.findByDescription(
@@ -33,8 +35,9 @@ export default class CreateProductService {
     const product = await this.productRepository.create({
       description,
       category_id,
-      quantity,
       value,
+      quantity,
+      measurement,
       status,
       image_filename,
     });

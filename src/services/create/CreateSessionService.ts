@@ -27,7 +27,7 @@ export default class CreateSessionService {
       {
         id: user.id,
       },
-      process.env.JWT_HASH,
+      process.env.JWT_ADMIN_SECRET,
       {
         subject: '',
         expiresIn: '1d',

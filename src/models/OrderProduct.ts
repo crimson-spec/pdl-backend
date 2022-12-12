@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-@Entity('orders_products')
+@Entity('order_products')
 export default class OrderProduct {
   @PrimaryColumn()
   order_id: string;

@@ -4,11 +4,11 @@ import CreateOrderPadService from '../services/create/CreateOrderPadService';
 
 class OrderPadController {
   async create(request: Request, response: Response) {
-    const { contact } = request.body;
+    const { table_id, contact } = request.body;
     const ipv4 = request.ip;
-    console.log({ contact, ipv4 });
     const service = container.resolve(CreateOrderPadService);
-    // const orderPad = service.execute()
+    const token = await service.execute({ table_id, contact, ipv4 });
+    return response.status(201).send(token);
   }
 }
 

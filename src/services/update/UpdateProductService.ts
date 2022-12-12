@@ -9,6 +9,7 @@ interface IRequest {
   value?: number;
   status?: boolean;
   quantity?: number;
+  measurement?: string;
   image_filename?: string;
 }
 
@@ -25,6 +26,7 @@ export default class UpdateProductService {
     value,
     status,
     quantity,
+    measurement,
     image_filename,
   }: IRequest) {
     const productExists = await this.productRepository.findById(id);
@@ -37,6 +39,7 @@ export default class UpdateProductService {
       value,
       status,
       quantity,
+      measurement,
       image_filename,
     });
     if (!product) throw new Error('Erro ao atualizar produto.');

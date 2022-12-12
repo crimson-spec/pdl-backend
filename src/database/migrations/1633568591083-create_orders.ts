@@ -18,8 +18,7 @@ export class createOrders1633568591083 implements MigrationInterface {
           },
           {
             name: 'internal_number',
-            type: 'int',
-            length: '10',
+            type: 'varchar',
           },
           {
             name: 'observation',

@@ -27,6 +27,9 @@ export default class Product {
   quantity: number;
 
   @Column()
+  measurement: string;
+
+  @Column()
   status: boolean;
 
   @Column()

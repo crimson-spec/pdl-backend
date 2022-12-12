@@ -21,7 +21,8 @@ class ProductController {
 
   async create(request: Request, response: Response) {
     const file = request.file;
-    const { description, category_id, value, quantity, status } = request.body;
+    const { description, category_id, value, quantity, measurement, status } =
+      request.body;
     const service = container.resolve(CreateProductService);
     const product = await service.execute({
       description,
@@ -29,6 +30,7 @@ class ProductController {
       value,
       quantity,
       status,
+      measurement,
       image_filename: file?.filename,
     });
     return response.status(201).json(product);
@@ -37,7 +39,8 @@ class ProductController {
   async update(request: Request, response: Response) {
     const file = request.file;
     const { id } = request.params;
-    const { description, category_id, value, quantity, status } = request.body;
+    const { description, category_id, value, quantity, measurement, status } =
+      request.body;
     const service = container.resolve(UpdateProductService);
     const product = await service.execute({
       id,
@@ -45,6 +48,7 @@ class ProductController {
       category_id,
       value,
       quantity,
+      measurement,
       status,
       image_filename: file?.filename,
     });

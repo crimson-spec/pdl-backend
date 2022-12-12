@@ -21,6 +21,7 @@ export class createOrderProducts1633568632673 implements MigrationInterface {
           {
             name: 'observation',
             type: 'varchar',
+            isNullable: true,
           },
         ],
         foreignKeys: [

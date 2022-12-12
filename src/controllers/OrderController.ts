@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import CreateOrderService from '../services/create/CreateOrderService';
 
 class OrderController {
   public async create(request: Request, response: Response) {
-    // const { table_id, order_pad_id, products, obs } = request.body;
-    // const service = container.resolve(service);
-    // const order = await sendOrderService.execute({
-    //   table_id,
-    //   order_pad_id,
-    //   products,
-    //   obs,
-    // });
-    // return response.status(201).json(order);
+    const { order_pad_id } = request;
+    const { products, observation } = request.body;
+    const service = container.resolve(CreateOrderService);
+    const order = await service.execute({
+      order_pad_id,
+      products,
+      observation,
+    });
+    return response.status(200).json(order);
   }
 }
 
