@@ -1,5 +1,9 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
 const { SnakeNamingStrategy } = require('typeorm-snake-naming-strategy');
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.production',
+});
 
 module.exports = {
   type: 'mysql',
@@ -9,16 +13,13 @@ module.exports = {
   password: process.env.DB_PASS || 'admin',
   database: process.env.DB_DATABASE || 'mydatabase',
   synchronize: false,
-  logging: true,
-  entities: [
-    'src/shared/infra/typeorm/entities/*.ts',
-    'src/modules/**/infra/typeorm/entities/*.ts',
-  ],
-  migrations: ['src/shared/infra/typeorm/database/migrations/*.ts'],
+  // logging: true,
+  entities: [process.env.TYPEORM_ENTITIES],
+  migrations: [process.env.TYPEORM_MIGRATIONS],
   subscribers: [''],
   cli: {
     entitiesDir: '',
-    migrationsDir: 'src/shared/infra/typeorm/database/migrations',
+    migrationsDir: process.env.TYPEORM_MIGRATIONS_DIR,
     subscribersDir: '',
   },
   namingStrategy: new SnakeNamingStrategy(),
