@@ -17,7 +17,7 @@ const routes = Router();
 routes.use('/sessions', sessionRouter);
 routes.use('/orderpads', orderPadRouter);
 routes.use('/orders', verifyOrderPad, orderRouter);
-routes.use(ensureAuthMiddleware);
+// routes.use(ensureAuthMiddleware);
 routes.use('/images', imageRouter);
 routes.use('/products', productRouter);
 routes.use('/categories', categoryRouter);
