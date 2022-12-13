@@ -13,6 +13,12 @@ export default class OrderRepository implements IOrderRepository {
     throw new Error('Method not implemented.');
   }
 
+  async index(): Promise<Order[]> {
+    return await this.ormRepository.find({
+      relations: ['order_products', 'order_products.product'],
+    });
+  }
+
   async create({ order_pad_id, observation }: ICreateOrderDTO): Promise<Order> {
     const order = this.ormRepository.create({
       order_pad_id,

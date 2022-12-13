@@ -9,6 +9,7 @@ import sectorRouter from './sector.routes';
 import tableRouter from './table.routes';
 import imageRouter from './image.routes';
 import orderPadRouter from './orderpad.routes';
+import reportRouter from './report.routes';
 import { ensureAuthMiddleware } from '../middlewares/auth';
 import { verifyOrderPad } from '../middlewares/order';
 
@@ -24,6 +25,7 @@ routes.use('/categories', categoryRouter);
 routes.use('/users', userRouter);
 routes.use('/sectors', sectorRouter);
 routes.use('/tables', tableRouter);
+routes.use('/reports', reportRouter);
 
 /**
  * TODAS AS ROTAS

@@ -4,9 +4,16 @@ import {
   CreateDateColumn,
   PrimaryColumn,
   BeforeInsert,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { generate } from '../shared/utils/generateRandomNumbers';
+import OrderPad from './OrderPad';
+import OrderProduct from './OrderProduct';
+import Product from './Product';
 // import OrderPad from './OrderPad';
 // import Product from './Product';
 
@@ -30,12 +37,12 @@ export default class Order {
   @CreateDateColumn()
   created_at: Date;
 
-  // @ManyToOne(() => OrderPad)
-  // order_pad: OrderPad;
+  @ManyToOne(() => OrderPad)
+  order_pad: OrderPad;
 
   // @ManyToMany(() => Product)
   // @JoinTable({
-  //   name: 'orders_products',
+  //   name: 'order_products',
   //   joinColumn: {
   //     name: 'order_id',
   //     referencedColumnName: 'id',
@@ -46,6 +53,9 @@ export default class Order {
   //   },
   // })
   // products: Product[];
+
+  @OneToMany(() => OrderProduct, (order_product) => order_product.order)
+  order_products: OrderProduct[];
 
   constructor() {
     if (!this.id) {

@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import Order from './Order';
+import Product from './Product';
 
 @Entity('order_products')
 export default class OrderProduct {
@@ -13,4 +15,10 @@ export default class OrderProduct {
 
   @Column()
   observation: string;
+
+  @ManyToOne(() => Order)
+  order: Order;
+
+  @ManyToOne(() => Product)
+  product: Order;
 }

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateOrderService from '../services/create/CreateOrderService';
+import ListOrderService from '../services/list/ListOrderService';
 
 class OrderController {
   public async create(request: Request, response: Response) {

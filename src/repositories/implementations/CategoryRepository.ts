@@ -20,6 +20,7 @@ export default class CategoryRepository implements ICategoryRepository {
   async show(id: string): Promise<Category> {
     return await this.ormRepository.findOne({ id });
   }
+
   async update({
     id,
     description,
